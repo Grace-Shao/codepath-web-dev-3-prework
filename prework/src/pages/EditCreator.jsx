@@ -21,6 +21,14 @@ const EditPost = () => {
         // Navigate back to the home page
         navigate('/');
     }
+    const deletePost = async (e) => {
+        e.preventDefault();
+        await supabase
+            .from('creators')
+            .delete()
+            .eq('id', id);
+        navigate('/');
+    }
     const handleChange = (e) => {
         const {name, value} = e.target;
         // return prev and update the value of the name
@@ -42,6 +50,7 @@ const EditPost = () => {
                 <label htmlFor="description">Description</label><br />
                 <input type="text" id="description" name="description" onChange={handleChange}/>
                 <input type="submit" value="Submit" onClick={updatePost} />
+                <button className="deleteButton" onClick={deletePost}>Delete</button>
             </form>
         </div>
     )
